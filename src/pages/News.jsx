@@ -16,7 +16,7 @@ const News = () => {
     }
 
     loadNews()
-  }, [])   // 👈 This makes it run when page opens
+  }, [])
 
   if (loading) {
     return (
@@ -28,28 +28,36 @@ const News = () => {
 
   return (
     <Wrapper>
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 py-6">
         {news.map((item, index) => (
-          <div key={index} className="card bg-base-100 shadow-xl">
+          <div key={index} className="card bg-base-100 shadow-xl hover:shadow-2xl transition">
             <figure>
               <img
-                src={item.urlToImage || "https://via.placeholder.com/300"}
+                src={item.urlToImage || "https://via.placeholder.com/400"}
                 alt="news"
+                className="h-48 w-full object-cover"
               />
             </figure>
 
             <div className="card-body">
-              <h2 className="card-title">{item.title}</h2>
-              <p>{item.description}</p>
+              <h2 className="card-title text-lg line-clamp-2">
+                {item.title}
+              </h2>
 
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-primary btn-sm"
-              >
-                Read More
-              </a>
+              <p className="text-sm line-clamp-3">
+                {item.description || "No description available."}
+              </p>
+
+              <div className="card-actions justify-end">
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-primary btn-sm"
+                >
+                  Read More
+                </a>
+              </div>
             </div>
           </div>
         ))}

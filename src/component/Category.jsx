@@ -5,17 +5,17 @@ const Category = ({ className }) => {
   const { setNews, fetchNews } = useNewsContext()
 
   const categories = [
-    "business",
-    "entertainment",
-    "general",
-    "health",
-    "science",
-    "sports",
-    "technology",
+    "Business",
+    "Entertainment",
+    "General",
+    "Health",
+    "Science",
+    "Sports",
+    "Technology",
   ]
 
   const handleClick = async (e) => {
-    const cat = e.currentTarget.value
+    const cat = e.currentTarget.value.toLowerCase()
     const data = await fetchNews(`/everything?q=${cat}`)
 
     if (data?.articles) {
@@ -26,13 +26,13 @@ const Category = ({ className }) => {
   return (
     <div className={className}>
       <Wrapper>
-        <div className="max-w-full w-fit m-auto flex overflow-x-auto px-4 gap-5">
+        <div className="flex flex-wrap justify-center gap-3 py-4">
           {categories.map((category) => (
             <button
               key={category}
               value={category}
               onClick={handleClick}
-              className="btn btn-primary"
+              className="btn btn-outline btn-primary"
             >
               {category}
             </button>
